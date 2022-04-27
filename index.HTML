@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo dos Dados</title>
+    <style>
+        .topo {
+            width: 500; height: 60px; margin:auto; 
+            text-align: center;
+            font-family: bolder;
+        }
+        .tabuleiro {
+            width: 500px; margin: auto;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: rgb(0, 89, 255);
+        }
+        #msg {
+            font-weight: bolder; margin: 15px;
+            border: 2px solid black; border-radius: 10px;
+            background-color: white;
+        }
+        .dados {
+            border: 1px solid black; border-radius: 10px;
+            margin: 20px; background-color: white;
+        }
+        img {
+            margin:5px;
+        }
+        .botao {
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        .fundo {
+            background-color: rgb(39, 39, 39);
+        }
+        .tiltulo{
+            color: aliceblue;
+        }
+    </style>
+</head>
+<p id = "Nome"></p>
+<script type="text/javascript">
+    
+</script>
+<body class="fundo"> 
+    <div class="topo">
+        <h1 class="tiltulo">Jogo dos Dados</h1>
+    </div>
+    <div class="tabuleiro">
+        <br><br>
+        <h3>Computador:</h3>
+        <div  id="comp" class="dados">
+        <img src="dadoInterrog.png">
+        <img src="dadoInterrog.png">
+        <img src="dadoInterrog.png">
+        </div>
+        <br><br>
+        <h3>Jogador:  </h3>
+        <div id="jog" class="dados">
+        <img src="dadoInterrog.png">
+        <img src="dadoInterrog.png">
+        <img src="dadoInterrog.png">
+        </div>
+        <br><br>
+        <p id="msg">O vencedor é .</p>
+        <p>Clique aqui para sortear os dados:</p>
+        <button class="botao" onclick="sortear()">JOGUE OS DADOS</button>
+        <br><br>
+    </div>
+    <script>
+        var dadosComp = [];
+        var dadosJog = [];
+        
+        function sortear() {
+            var totComp = 0; 
+            var totJog = 0;
+
+            for (var i=0; i < 3; i++) {
+                // computador
+                dadosComp[i] = Math.floor(Math.random() * 6) + 1;
+                totComp += dadosComp[i];
+                // Jogador
+                dadosJog[i] = Math.floor(Math.random() * 6) + 1;
+                totJog += dadosJog[i];
+            }
+            // colocar os dados sorteados na página
+            document.getElementById("comp").innerHTML = 
+                "<img src='dado"+ dadosComp[0] +".png'>"+
+                "<img src='dado"+ dadosComp[1] +".png'>"+
+                "<img src='dado"+ dadosComp[2] +".png'>";
+            document.getElementById("jog").innerHTML = 
+                "<img src='dado"+ dadosJog[0] +".png'>"+
+                "<img src='dado"+ dadosJog[1] +".png'>"+
+                "<img src='dado"+ dadosJog[2] +".png'>";
+                var mensagem = "";
+                if (totComp > totJog) {
+                    mensagem = "Computador venceu o Jogador ("+totComp+" a "+totJog+")";
+                } else {
+                    if (totComp < totJog) {
+                        mensagem = "Jogador venceu o Computador ("+totJog+" a "+totComp+")";
+                    } else {
+                        mensagem = "Jogador e Computador empataram ("+totJog+" a "+totComp+")";
+                    }
+                }
+                document.getElementById("msg").innerHTML = mensagem;
+        }
+
+
+    </script>
+</body>
+</html>
